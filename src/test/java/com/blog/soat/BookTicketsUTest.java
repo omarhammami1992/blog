@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.blog.soat.entity.BookingDetails;
 import com.blog.soat.entity.FreeSeat;
 import com.blog.soat.entity.Seat;
+import com.blog.soat.fake.FakeBookingDetails;
 import com.blog.soat.repository.BookingReferenceRepository;
 import com.blog.soat.repository.TrainRepository;
 
@@ -48,7 +49,7 @@ class BookTicketsUTest {
       BookingDetails bookingDetails = bookTickets.execute(TRAIN_ID, seatRequest);
 
       // then
-      BookingDetails expectedBookingDetails = BookingDetails.builder().trainId(TRAIN_ID).bookingReference(BOOKING_REFERENCE).freeSeats(of(new FreeSeat("A", 2))).build();
+      BookingDetails expectedBookingDetails = new FakeBookingDetails(TRAIN_ID, BOOKING_REFERENCE, of(new FreeSeat("A", 2)));
       assertThat(bookingDetails).usingRecursiveComparison().isEqualTo(expectedBookingDetails);
    }
 
@@ -66,7 +67,7 @@ class BookTicketsUTest {
       BookingDetails bookingDetails = bookTickets.execute(TRAIN_ID, seatRequest);
 
       // then
-      BookingDetails expectedBookingDetails = BookingDetails.builder().trainId(TRAIN_ID).build();
+      BookingDetails expectedBookingDetails = new FakeBookingDetails(TRAIN_ID);
       assertThat(bookingDetails).usingRecursiveComparison().isEqualTo(expectedBookingDetails);
    }
 
@@ -87,7 +88,7 @@ class BookTicketsUTest {
       BookingDetails bookingDetails = bookTickets.execute(TRAIN_ID, seatRequest);
 
       // then
-      BookingDetails expectedBookingDetails = BookingDetails.builder().trainId(TRAIN_ID).build();
+      BookingDetails expectedBookingDetails = new FakeBookingDetails(TRAIN_ID);
       assertThat(bookingDetails).usingRecursiveComparison().isEqualTo(expectedBookingDetails);
    }
 }

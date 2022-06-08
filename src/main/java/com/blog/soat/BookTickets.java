@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import com.blog.soat.entity.BookingDetails;
+import com.blog.soat.entity.BookingDetailsDto;
 import com.blog.soat.entity.FreeSeat;
 import com.blog.soat.entity.Seat;
 import com.blog.soat.repository.BookingReferenceRepository;
@@ -28,9 +29,9 @@ public class BookTickets {
       if (coachSeats.isPresent()) {
          List<FreeSeat> seatsToBook = buildSeatsToBook(seatRequest, coachSeats.get());
          String bookingReference = bookingReferenceRepository.generate();
-         return BookingDetails.builder().trainId(trainId).bookingReference(bookingReference).freeSeats(seatsToBook).build();
+         return BookingDetailsDto.builder().trainId(trainId).bookingReference(bookingReference).freeSeats(seatsToBook).build();
       } else {
-         return BookingDetails.builder().trainId(trainId).build();
+         return BookingDetailsDto.builder().trainId(trainId).build();
       }
    }
 
