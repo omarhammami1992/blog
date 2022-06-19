@@ -44,7 +44,7 @@ class BookTicketsUTest {
       BookingDetails bookingDetails = bookTickets.execute(TRAIN_ID, seatRequest);
 
       // then
-      BookingDetails expectedBookingDetails = BookingDetailsFixture.create(TRAIN_ID, BOOKING_REFERENCE, of(new FreeSeat("A", 2)));
+      BookingDetails expectedBookingDetails = BookingDetails.builder().trainId(TRAIN_ID).bookingReference(BOOKING_REFERENCE).freeSeats(of(new FreeSeat("A", 2))).build();
       assertThat(bookingDetails).usingRecursiveComparison().isEqualTo(expectedBookingDetails);
    }
 
@@ -62,7 +62,7 @@ class BookTicketsUTest {
       BookingDetails bookingDetails = bookTickets.execute(TRAIN_ID, seatRequest);
 
       // then
-      BookingDetails expectedBookingDetails = BookingDetailsFixture.createEmpty(TRAIN_ID);
+      BookingDetails expectedBookingDetails = BookingDetails.builder().trainId(TRAIN_ID).build();
       assertThat(bookingDetails).usingRecursiveComparison().isEqualTo(expectedBookingDetails);
    }
 
@@ -83,7 +83,7 @@ class BookTicketsUTest {
       BookingDetails bookingDetails = bookTickets.execute(TRAIN_ID, seatRequest);
 
       // then
-      BookingDetails expectedBookingDetails = BookingDetailsFixture.createEmpty(TRAIN_ID);
+      BookingDetails expectedBookingDetails = BookingDetails.builder().trainId(TRAIN_ID).build();
       assertThat(bookingDetails).usingRecursiveComparison().isEqualTo(expectedBookingDetails);
    }
 }
